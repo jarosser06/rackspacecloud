@@ -20,6 +20,7 @@
 
 require 'tempfile'
 require 'chef/digester'
+require 'chef/config'
 
 include Opscode::Rackspace::Storage
 
@@ -42,7 +43,7 @@ end
 
 action :create do
 
-  f = Tempfile.new('download')
+  f = Tempfile.new('download', Chef::Config[:file_cache_path])
 
   if new_resource.binmode
     f.binmode
